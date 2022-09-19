@@ -25,11 +25,10 @@ sub main(@){
   runOrDie "git", "clean", "-fd";
   runOrDie "git", "checkout", "origin/master";
   runOrDie "make";
-  runOrDie "sudo", "make", "install";
-  runOrDie "sudo", "depmod";
-  runOrDie "sudo", "modprobe", "acpi_call";
+  runOrDie "doas", "make", "install";
+  runOrDie "doas", "depmod";
+  runOrDie "doas", "modprobe", "acpi_call";
 }
-
 sub versionCmp($$){
   my ($v1, $v2) = @_;
   die "Malformed kernel version $v1\n" if $v1 !~ /^(\d+)\.(\d+)/;
