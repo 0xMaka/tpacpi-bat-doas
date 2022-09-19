@@ -12,8 +12,9 @@ sub runOrDie(@){
 }
 
 sub main(@){
-  runOrDie "sudo", "cp", "tpacpi-bat", "$prefix/bin";
-
+  runOrDie "doas", "pacman", "-S", "linux-headers";
+  runOrDie "doas", "cp", "tpacpi-bat", "$prefix/bin";
+  
   my $localRepo = '/tmp/acpi_call';
   if(not -d $localRepo){
     runOrDie "git", "clone", $acpiCallGitRepo, $localRepo;
